@@ -1,4 +1,4 @@
-package com.github.autoreply;
+package com.github.autoreply.util;
 
 import android.app.KeyguardManager;
 import android.content.Context;

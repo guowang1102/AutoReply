@@ -1,4 +1,4 @@
-package com.github.autoreply;
+package com.github.autoreply.service;
 
 import android.accessibilityservice.AccessibilityService;
 import android.app.Notification;
@@ -13,6 +13,10 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
+
+import com.github.autoreply.Config;
+import com.github.autoreply.UI;
+import com.github.autoreply.util.PhoneController;
 
 import java.util.List;
 

@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,6 +22,10 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+
+import com.github.autoreply.service.AutoReplyService;
+import com.github.autoreply.util.DensityUtils;
+import com.github.autoreply.util.SPHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -115,9 +118,6 @@ public class MainActivity extends AppCompatActivity {
         ListView lvContents = (ListView) findViewById(R.id.lv_reply_content);
         lvContents.setAdapter(mAdapter);
 
-        CircleSeekBar circleSeekBar = (CircleSeekBar) findViewById(R.id.circle_seekbar);
-        circleSeekBar.setProgress(30);
-//        circleSeekBar.setProgressFrontColor(Color.BLUE);
     }
 
 
@@ -170,9 +170,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkAutoOpenLuckyMoneyService(Context context) {
-        if (!AutoOpenLuckyMoneyService.isConnected()) {
-            showAccessibilityServiceSettings(context);
-        }
+//        if (!AutoOpenLuckyMoneyService.isConnected()) {
+//            showAccessibilityServiceSettings(context);
+//        }
     }
 
     private Dialog mDialog = null;

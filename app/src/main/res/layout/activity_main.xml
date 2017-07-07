@@ -92,20 +92,7 @@
             android:layout_below="@id/line3"
             android:layout_marginTop="10dp"></ListView>
 
-        <com.github.autoreply.CircleSeekBar
-            android:id="@+id/circle_seekbar"
-            android:layout_width="200dp"
-            android:layout_height="260dp"
-            android:layout_centerInParent="true"
-            android:thumb="@mipmap/scan"
-            app:progress_background="@android:color/darker_gray"
-            app:progress_front="@android:color/holo_blue_light"
-            app:progress_max="100"
-            app:progress_text_color="@android:color/holo_green_light"
-            app:progress_text_size="16dp"
-            app:progress_text_stroke_width="4dp"
-            app:progress_width="8dp"
-            app:show_progress_text="true" />
+
 
     </RelativeLayout>
 
