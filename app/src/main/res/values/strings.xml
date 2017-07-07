@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WXAutoManager</string>
+    <string name="app_name">微信回复助手</string>
 
     <string name="auto_reply_description">
         微信自动回复信息服务\n

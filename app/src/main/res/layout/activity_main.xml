@@ -53,35 +53,11 @@
                 android:layout_marginEnd="10dp" />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/line2"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@id/line1">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="10dp"
-                android:text="自动抢红包"
-                android:textSize="21sp" />
-
-            <android.support.v7.widget.SwitchCompat
-                android:id="@+id/sw_auto_open_lucky_money"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="10dp" />
-        </RelativeLayout>
-
         <View
             android:id="@+id/line3"
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:layout_below="@id/line2"
+            android:layout_below="@id/line1"
             android:layout_marginTop="5dp"
             android:background="?android:attr/listDivider" />
 
