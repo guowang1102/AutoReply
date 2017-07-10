@@ -10,8 +10,8 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 
-import com.netease.nim.uikit.common.util.log.LogUtil;
 
 public class NetworkUtil {
 
@@ -342,7 +342,7 @@ public class NetworkUtil {
 		}
 
 		String proxyHost = android.net.Proxy.getDefaultHost();
-		LogUtil.e(TAG, "proxyHost:" + proxyHost);
+		Log.e(TAG, "proxyHost:" + proxyHost);
 		return proxyHost;
 	}
 
@@ -356,7 +356,7 @@ public class NetworkUtil {
 		}
 
 		String proxyHost = android.net.Proxy.getDefaultHost();
-		LogUtil.e(TAG, "proxyHost:" + proxyHost);
+		Log.e(TAG, "proxyHost:" + proxyHost);
 		return proxyHost;
 	}
 

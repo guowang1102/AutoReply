@@ -16,6 +16,5 @@ public class MyApp extends Application {
         super.onCreate();
         NimUIKit.init(this);
         AppCrashHandler.getInstance(this);
-
     }
 }

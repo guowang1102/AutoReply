@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -22,11 +24,11 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-
 import com.github.autoreply.service.AutoReplyService;
 import com.github.autoreply.util.DensityUtils;
 import com.github.autoreply.util.SPHelper;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,9 +65,9 @@ public class MainActivity extends AppCompatActivity {
         Config.AutoReplyText = SPHelper.getInstance().getString(KEY_AUTO_REPLY_TEXT);
 
         // 自动回复默认文本
-        mData.add("Hey~");
-        mData.add("你已被拉进黑名单");
-        mData.add("忙碌.jpg");
+//        mData.add("Hey~");
+//        mData.add("你已被拉进黑名单");
+//        mData.add("忙碌.jpg");
     }
 
 
@@ -85,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         swReply.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
+                if (isChecked) {
                     checkAutoReplyService(MainActivity.this);
                     Config.isOpenAutoReply = true;
                     SPHelper.getInstance().putBoolean(KEY_REPLY, true);
@@ -97,21 +99,21 @@ public class MainActivity extends AppCompatActivity {
         });
         swReply.setChecked(Config.isOpenAutoReply);
 
-        SwitchCompat swLuckyMoney = (SwitchCompat) findViewById(R.id.sw_auto_open_lucky_money);
-        swLuckyMoney.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    checkAutoOpenLuckyMoneyService(MainActivity.this);
-                    Config.isOpenAutoOpenLuckyMoney = true;
-                    SPHelper.getInstance().putBoolean(KEY_LUCKY_MONEY, true);
-                } else {
-                    Config.isOpenAutoOpenLuckyMoney = false;
-                    SPHelper.getInstance().putBoolean(KEY_LUCKY_MONEY, false);
-                }
-            }
-        });
-        swLuckyMoney.setChecked(Config.isOpenAutoOpenLuckyMoney);
+//        SwitchCompat swLuckyMoney = (SwitchCompat) findViewById(R.id.sw_auto_open_lucky_money);
+//        swLuckyMoney.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if(isChecked) {
+//                    checkAutoOpenLuckyMoneyService(MainActivity.this);
+//                    Config.isOpenAutoOpenLuckyMoney = true;
+//                    SPHelper.getInstance().putBoolean(KEY_LUCKY_MONEY, true);
+//                } else {
+//                    Config.isOpenAutoOpenLuckyMoney = false;
+//                    SPHelper.getInstance().putBoolean(KEY_LUCKY_MONEY, false);
+//                }
+//            }
+//        });
+//        swLuckyMoney.setChecked(Config.isOpenAutoOpenLuckyMoney);
 
 
         mAdapter = new MyAdapter(this, mData, Config.SelectId);
@@ -122,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private final int ADD_TEXT_LIMIT = 8;
+
     private void showAddReplyView(final Context context) {
         final RelativeLayout contentView = new RelativeLayout(context);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
@@ -129,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
         params.setMargins(DensityUtils.dp2px(context, 30), 0,
                 DensityUtils.dp2px(context, 20), 0);
-        final EditText editText =  new EditText(context);
+        final EditText editText = new EditText(context);
         contentView.addView(editText, params);
 
         final Dialog dialog = new AlertDialog.Builder(context)
@@ -176,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Dialog mDialog = null;
+
     private void showAccessibilityServiceSettings(Context context) {
         if (mDialog != null && mDialog.isShowing()) {
             mDialog.dismiss();
@@ -228,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             ViewHolder viewHolder;
-            if(convertView == null) {
+            if (convertView == null) {
                 viewHolder = new ViewHolder();
                 convertView = mInflater.inflate(R.layout.listview_item, parent, false);
                 viewHolder.textView = (TextView) convertView.findViewById(R.id.tv_content);
@@ -243,7 +247,7 @@ public class MainActivity extends AppCompatActivity {
             viewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if(isChecked) {
+                    if (isChecked) {
                         mSelectId = position;
                         notifyDataSetChanged();
                         // 保存数据
@@ -270,6 +274,43 @@ public class MainActivity extends AppCompatActivity {
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.addCategory(Intent.CATEGORY_HOME);
         startActivity(i);
+//        mHandler.postDelayed(sRunable,1000*60*5);
     }
+
+    /**
+     * 声明一个静态的Handler内部类，并持有外部类的弱引用
+     */
+
+    private static class InnerHandler extends Handler {
+
+        private final WeakReference<MainActivity> mActivity;
+
+        public InnerHandler(MainActivity activity) {
+            mActivity = new WeakReference<MainActivity>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            MainActivity activity = mActivity.get();
+            if (activity != null) {
+
+            }
+        }
+    }
+
+    private final InnerHandler mHandler = new InnerHandler(this);
+
+    /**
+     * 静态的匿名内部类不会持有外部类的引用
+     */
+
+    private static final Runnable sRunable = new Runnable() {
+        @Override
+        public void run() {
+
+        }
+    };
+
+
 }
 
