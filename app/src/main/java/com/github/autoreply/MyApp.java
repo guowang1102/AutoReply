@@ -3,6 +3,7 @@ package com.github.autoreply;
 import android.app.Application;
 
 import com.github.autoreply.crash.AppCrashHandler;
+import com.github.autoreply.service.InitializeService;
 
 /**
  * function:
@@ -16,5 +17,7 @@ public class MyApp extends Application {
         super.onCreate();
         NimUIKit.init(this);
         AppCrashHandler.getInstance(this);
+//        new Thread().start();
+        InitializeService.start(this);   //后台任务初始化
     }
 }
