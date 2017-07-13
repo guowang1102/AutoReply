@@ -21,11 +21,6 @@ import com.github.autoreply.util.PhoneController;
 import java.util.List;
 
 /**
- * Created by leo on 2016/8/4.
- * 自动回复服务
- */
-
-/**
  * Created by 韦国旺 on 2017/7/4.
  * 自动回复服务
  */
